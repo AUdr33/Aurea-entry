@@ -2,10 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AUREA</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      background-color: black;
+      color: gold;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .vortex {
+      width: 200px;
+      height: 200px;
+      border: 8px solid gold;
+      border-top: 8px solid transparent;
+      border-radius: 50%;
+      animation: spin 3s linear forwards;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); opacity: 1; }
+      100% { transform: rotate(720deg) scale(10); opacity: 0; }
+    }
+    .hidden { display: none; }
+    .input-area { margin-top: 20px; }
+    .input-code {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    .submit-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: gold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
-<body class="bg-black text-white">
-  <div id="root"></div>
+<body>
+  <img src="logo.png" alt="AUREA Logo" width="150" />
+  <div class="input-area">
+    <input id="code" class="input-code" placeholder="Enter your invite code" />
+    <button class="submit-btn" onclick="startVortex()">Unlock Access</button>
+  </div>
+  <div id="vortex" class="vortex hidden"></div>
+  <script>
+    function startVortex() {
+      const code = document.getElementById("code").value.trim();
+      const validCodes = ["9X2A-B7KL", "K8ZM-21PQ"];
+      if (validCodes.includes(code)) {
+        document.querySelector('.input-area').style.display = 'none';
+        document.getElementById('vortex').classList.remove('hidden');
+        setTimeout(() => {
+          window.location.href = "registration.html";
+        }, 3000);
+      } else {
+        alert("Invalid invite code");
+      }
+    }
+  </script>
 </body>
 </html>
